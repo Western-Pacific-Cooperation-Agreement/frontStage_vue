@@ -26,7 +26,7 @@ const post='/post'  //标识该请求方法为post请求方法
 export const getSearchParam = () => {
   return request({
     url: BaseURL+get+'/searchParam',
-    methods: get
+    methods: 'get'
   })
 }
 
@@ -42,7 +42,7 @@ export const getSearchParam = () => {
 export const getDefultList = () => {
   return request({
     url: BaseURL+get+'/DefultList',
-    methods: get
+    methods: 'get'
   })
 }
 /** 
@@ -76,7 +76,7 @@ export const getSearchList = (
     +'?actObject='+actObject+'&'
     +'?fuzzySearch='+fuzzySearch+'&'
     ,
-    methods: get
+    methods: 'get'
   })
 }
 
@@ -91,7 +91,7 @@ export const getSearchList = (
 export const getActivityInfo = (id) => {
   return request({
     url: BaseURL +get+'/activityInfo'+'?actId='+id,
-    methods: get
+    methods: 'get'
   })
 }
 

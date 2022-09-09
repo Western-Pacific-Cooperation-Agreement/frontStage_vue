@@ -4,7 +4,7 @@ import request from '@/utils/axios' //api可以理解为普通axios的第二次�
 
 var qs = require('qs')              //引入qs，会方便我们数据的转换操作
 
-const BaseURL = '/act'//基础首页路径 =>对应后端请求的@RequestMapping("/act")
+const BaseURL = '/act'//基础首页路径 =>对应后端请求的 @RequestMapping("/act")
 
 const get='/get'    //标识该请求方法为get请求
 
@@ -23,7 +23,7 @@ const post='/post'  //标识该请求方法为post请求方法
 export const getSearchParam = () => {
   return request({
     url: BaseURL+get+'/searchParam',
-    methods: get
+    methods: 'get'
   })
 }
 
@@ -39,7 +39,7 @@ export const getSearchParam = () => {
 export const getDefultList = () => {
   return request({
     url: BaseURL+get+'/DefultList',
-    methods: get
+    methods: 'get'
   })
 }
 //******************以下为post方法请求集*************************
@@ -60,7 +60,7 @@ export const getDefultList = () => {
 export const addSignUpAct = (id) => {
   return request({
     url: BaseURL +post+'/addSignUpAct'+'?actId='+id,
-    methods: post
+    methods: 'post'
   })
 }
 
