@@ -2,7 +2,7 @@
 import request from '@/utils/axios'
 
 
-var qs = require('qs')              //引入jqury，会方便我们数据的转换操作
+var qs = require('qs')              //引入qs，会方便我们数据的转换操作
 
 //登入请求 比较特殊 并且全局唯一 这里我们就不需要进行配置基础地址
 // const BaseURL = '/act'//基础首页路径 =>对应后端请求的@RequestMapping("/act")

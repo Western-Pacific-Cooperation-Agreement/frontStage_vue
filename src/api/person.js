@@ -2,7 +2,7 @@
 import request from '@/utils/axios' //api可以理解为普通axios的第二次封装
                                     //=>第一次主要是配置信息，第二次业务逻辑
 
-var qs = require('qs')              //引入jqury，会方便我们数据的转换操作
+var qs = require('qs')              //引入qs，会方便我们数据的转换操作
 
 const BaseURL = '/act'//基础首页路径 =>对应后端请求的@RequestMapping("/act")
 
