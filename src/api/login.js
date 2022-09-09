@@ -1,25 +1,62 @@
 // 当前模块为登录请求api，API进行统一管理，即对请求接口统一管理
-import request from '@/utils/request'
+import request from '@/utils/axios'
 
-export function login(data) {
+
+var qs = require('qs')              //引入jqury，会方便我们数据的转换操作
+
+//登入请求 比较特殊 并且全局唯一 这里我们就不需要进行配置基础地址
+// const BaseURL = '/act'//基础首页路径 =>对应后端请求的@RequestMapping("/act")
+
+// const get='/get'    //标识该请求方法为get请求
+
+// const post='/post'  //标识该请求方法为post请求方法
+
+/***************************Get请求集 */
+/** 
+ * 方法名：getCaptcha
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获取验证码
+ * 时间：2022年9月9日15:14:04
+ * */
+
+ export function getCaptcha() {
   return request({
-    url: '/user/login',
-    method: 'post',
-    data
+    url: '/captcha',
+    methods: 'get',//  =>注意啦，登入请求后端采用的是spring security进行拦截
   })
 }
 
-export function getInfo(token) {
+
+
+/***************************Post请求集 */
+
+/** 
+ * 方法名：login
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 请求登入
+ * 时间：2022年9月9日15:14:08
+ * */
+ export function login(param) {
   return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+    url: '/login?'+param,
+    methods: 'post',//  =>注意啦，登入请求后端采用的是spring security进行拦截
+    param
   })
 }
 
+
+/** 
+ * 方法名：logout()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 退出登入
+ * 时间：2022年9月9日14:19:23
+ * */
 export function logout() {
   return request({
     url: '/user/logout',
-    method: 'post'
+    methods: 'post'
   })
 }

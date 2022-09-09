@@ -2,8 +2,8 @@
   <div class="page">
     
     <el-carousel indicator-position="outside" height="800px">
-    <el-carousel-item v-for="item in 4" :key="item">
-      <h3>{{ item }}</h3>
+    <el-carousel-item v-for="item in carousel" >
+    <img :src="item.url"  class="image">
     </el-carousel-item>
   </el-carousel>
 
@@ -57,9 +57,18 @@
 </template>
 
 <script>
+  import { getRotationChart } from '@/api/home';
 export default {
   data() {
     return {
+      carousel:[{
+        url:""
+      },
+      {
+        url:"https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
+
+      }
+      ],
       hotAct:[{
         actName:"周末文化艺术节",
         currentDate: new Date(),
@@ -98,6 +107,19 @@ export default {
       },
       ]
     };
+  },
+  methods:{
+    getRotationChart(){
+      console.log("获取轮播图")
+      getRotationChart().then(res=>{
+        console.log(res)
+        this.carousel=res.data.data;
+
+  })
+    }
+  },
+  created(){
+    this.getRotationChart()
   }
 }
 </script>
