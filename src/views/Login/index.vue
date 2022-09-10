@@ -80,7 +80,6 @@
     import HelloUser from '@/components/HelloUser/index.vue'
 	export default {
 		name: "Login",
-       
 		data() {
 			return {
                 editForm: {
@@ -116,6 +115,7 @@
 			submitForm(formName) {
 				this.$refs[formName].validate((valid) => {
 					if (valid) {
+						//this.$axios.post('/login?'+qs.stringify(this.loginForm)).
 						login(qs.stringify(this.loginForm)).then(res => {
 							console.log("登入成功后的相应")
 							console.log(res)
@@ -125,7 +125,6 @@
 							this.$store.commit('SET_TOKEN', jwt)
 							this.$router.push("/")
 
-							console.log(localStorage[''])
 						})
 
 					} else {
@@ -141,7 +140,7 @@
 				
 				getCaptcha().then(res => {
 
-					console.log("/captcha")
+					console.log("获取了验证码")
 					console.log(res)
 					
 

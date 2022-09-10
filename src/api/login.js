@@ -23,7 +23,7 @@ var qs = require('qs')              //引入qs，会方便我们数据的转换�
  export function getCaptcha() {
   return request({
     url: '/captcha',
-    methods: 'get',//  =>注意啦，登入请求后端采用的是spring security进行拦截
+    method: 'get',//  =>注意啦，登入请求后端采用的是spring security进行拦截
   })
 }
 
@@ -39,10 +39,10 @@ var qs = require('qs')              //引入qs，会方便我们数据的转换�
  * 时间：2022年9月9日15:14:08
  * */
  export function login(param) {
+  console.log('/login?'+param);
   return request({
-    url: '/login?'+param,
-    methods: 'post',//  =>注意啦，登入请求后端采用的是spring security进行拦截
-    param
+    url: ''+'/login?'+param,
+    method: 'post',//  =>注意啦，登入请求后端采用的是spring security进行拦截
   })
 }
 
@@ -57,6 +57,6 @@ var qs = require('qs')              //引入qs，会方便我们数据的转换�
 export function logout() {
   return request({
     url: '/user/logout',
-    methods: 'post'
+    method: 'post'
   })
 }

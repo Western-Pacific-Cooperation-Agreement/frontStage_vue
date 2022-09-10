@@ -90,11 +90,65 @@ export const getSearchList = (
  * */
 export const getActivityInfo = (id) => {
   return request({
-    url: BaseURL +get+'/activityInfo'+'?actId='+id,
-    methods: 'get'
+    url: BaseURL +get+'/activityInfo/'+id,
+    method: 'get'
   })
 }
 
+/** 
+ * 方法名：getUserCollected()
+ * 方法参数：活动的id
+ * 作者：WPCA-XieQijiang
+ * 描述： 通过活动的id获取用户是否收藏了该活动
+ * 时间：2022年9月9日14:19:23
+ * */
+ export const getUserCollected = (id) => {
+  return request({
+    url: BaseURL +get+'/userCollected/'+id,
+    method: 'get'
+  })
+}
+
+/** 
+ * 方法名：getUserApplied()
+ * 方法参数：活动的id
+ * 作者：WPCA-XieQijiang
+ * 描述： 通过活动的id获取用户是否报名了该活动
+ * 时间：2022年9月10日16:35:28
+ * */
+ export const getUserApplied = (id) => {
+  return request({
+    url: BaseURL +get+'/userApplied/'+id,
+    method: 'get'
+  })
+}
+/** 
+ * 方法名：getUserInfo()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得当前用户信息
+ * 时间：2022年9月10日16:35:28
+ * */
+ export function getUserInfo(){
+  return request({
+    url: BaseURL +get+'/userInfo',
+    method: 'get'
+  })
+}
+
+/** 
+ * 方法名：getUserInfo()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得用角色信息
+ * 时间：2022年9月10日16:35:28
+ * */
+ export function getRoleInfo(){
+  return request({
+    url: BaseURL +get+'/roleInfo',
+    method: 'get'
+  })
+}
 
 //******************以下为post方法请求集 注意这里的命名要求*************************
 
@@ -109,14 +163,16 @@ export const getActivityInfo = (id) => {
  * 方法名：addCollectedAct()
  * 方法参数：活动的id
  * 作者：WPCA-XieQijiang
- * 描述：获得轮播图数据
+ * 描述：收藏
  * 时间：2022年9月9日14:19:23
  * */
 
-export const addCollectedAct = (id) => {
+export function addCollectedAct(id){
+
   return request({
-    url: BaseURL +post+'/addCollectedAct'+'?actId='+id,
-    methods: post
+    url: BaseURL +post+'/addCollectedAct',
+    method:  'post',
+    data: {id:id}
   })
 }
   
@@ -125,13 +181,16 @@ export const addCollectedAct = (id) => {
  * 方法名：addSignUpAct()
  * 方法参数：活动的id
  * 作者：WPCA-XieQijiang
- * 描述：报名参加活动
+ * 描述：报名
  * 时间：2022年9月9日14:19:23
  * */
-export const addSignUpAct = (id) => {
+export function addSignUpAct(id){
+
+
   return request({
-    url: BaseURL +post+'/addSignUpAct'+'?actId='+id,
-    methods: post
+    url: BaseURL +post+'/addSignUpAct',
+    method:  'post',
+    data: {id:id}
   })
 }
 
@@ -140,14 +199,18 @@ export const addSignUpAct = (id) => {
  * 方法名：addCollectedAct()
  * 方法参数：活动的id
  * 作者：WPCA-XieQijiang
- * 描述：获得轮播图数据
+ * 描述：取消收藏
  * 时间：2022年9月9日14:19:23
  * */
 
-   export const cancelCollectedAct = (id) => {
+   export function cancelCollectedAct(id){
+    const params = new URLSearchParams()
+    params.append('id',id)
+
     return request({
-      url: BaseURL +post+'/cancelCollectedAct'+'?actId='+id,
-      methods: post
+      url: BaseURL +post+'/cancelCollectedAct',
+      method: 'post',
+      data: {id:id}
     })
   }
     
@@ -156,13 +219,16 @@ export const addSignUpAct = (id) => {
    * 方法名：addSignUpAct()
    * 方法参数：活动的id
    * 作者：WPCA-XieQijiang
-   * 描述：取消报名参加活动
+   * 描述：取消报名
    * 时间：2022年9月9日14:19:23
    * */
-  export const cancelSignUpAct = (id) => {
+  export function cancelSignUpAct(id) {
+    const params = new URLSearchParams()
+    params.append('id',id)
     return request({
-      url: BaseURL +post+'/cancelSignUpAct'+'?actId='+id,
-      methods: post
-    })
+      url: BaseURL +post+'/cancelSignUpAct',
+      method:  'post',
+      data: {id:id}
+    },)
   }
   

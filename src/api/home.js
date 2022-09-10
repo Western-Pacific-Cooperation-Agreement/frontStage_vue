@@ -22,7 +22,7 @@ const post='/post'  //标识该请求方法为post请求方法
 export function getRotationChart() {
     return request({
       url: ''+BaseURL+get+'/rotationChart',//这里的get+'/rotationChart =>对应后端请求的GetMapping("/get/rotationChart")
-      methods: 'get',
+      method: 'get',
     })
   }
 
@@ -35,8 +35,8 @@ export function getRotationChart() {
  * */
  export function getHotAct() {
     return request({
-      url: BaseURL+get+'/hotAct',
-      methods: 'get',
+      url: ''+BaseURL+get+'/hotAct',
+      method: 'get',
     })
 }
 
@@ -49,7 +49,7 @@ export function getRotationChart() {
  * */
  export function getRecommendAct() {
     return request({
-      url: BaseURL+get+'/recommendAct',
+      url: ''+BaseURL+get+'/recommendAct',
       method: 'get',
     })
 }

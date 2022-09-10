@@ -39,7 +39,7 @@ export const getSearchParam = () => {
 export const getDefultList = () => {
   return request({
     url: BaseURL+get+'/DefultList',
-    methods: 'get'
+    method: 'get'
   })
 }
 //******************以下为post方法请求集*************************
@@ -60,7 +60,7 @@ export const getDefultList = () => {
 export const addSignUpAct = (id) => {
   return request({
     url: BaseURL +post+'/addSignUpAct'+'?actId='+id,
-    methods: 'post'
+    method: 'post',
   })
 }
 

@@ -1,16 +1,14 @@
 <template>
   <div id="app">
      
-<!-- 
+
        <div id="loader-wrapper" v-if="isRouterAlive">
       <div id="loader"></div>
       <div class="loader-section section-left"></div>
       <div class="loader-section section-right"></div>
       <div class="load_title">正在加载系统,请耐心等待</div>
-        </div> -->
-
-       <!-- <router-view v-if="!isRouterAlive"/> -->
-       <router-view/>
+        </div> 
+        <router-view v-show="!isRouterAlive"/> 
 
   </div>
 </template>
@@ -33,7 +31,7 @@ export default {
       var self=this;
      setTimeout(function(){
 		self.isRouterAlive=false;
-	},1);
+	},500);
     }
   },created(){
     this.reload();
@@ -49,8 +47,6 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-
 /*动画参数*/
 
     html,

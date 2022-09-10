@@ -14,12 +14,12 @@
     <el-row :gutter="12">
     <el-col :span="8" v-for="(item,key) in hotAct" :key="key">
     <el-card :body-style="{ padding: '0px' }">
-      <img src = "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+      <img :src="item.actUrl" class="imagesmall">
       <div style="padding: 14px;">
-        <span>{{hotAct[key].actName}}</span>
+        <span>{{item.actName}}</span>
         <div class="bottom clearfix">
-          <time class="time">{{ hotAct[key].currentDate }}</time>
-          <el-button type="text" class="button">查看详情</el-button>
+          <time class="time">{{ item.actStartDate }}</time>
+          <el-button type="text" class="button" @click="lookDetail(item.id)" >查看详情</el-button>
         </div>
       </div>
     </el-card>
@@ -35,12 +35,12 @@
     <el-row :gutter="12">
       <el-col :span="8" v-for="(item,key) in recommendAct" :key="key">
         <el-card :body-style="{ padding: '0px' }">
-          <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image">
+          <img :src="item.actUrl" class="imagesmall">
           <div style="padding: 14px;">
-            <span>{{recommendAct[key].actName}}</span>
+            <span>{{item.actName}}</span>
             <div class="bottom clearfix">
-              <time class="time">{{ recommendAct[key].currentDate }}</time>
-              <el-button type="text" class="button">查看详情</el-button>
+              <time class="time">{{ item.actStartDate }}</time>
+                <el-button type="text" class="button" @click="lookDetail(item.id)" >查看详情</el-button>          
             </div>
           </div>
         </el-card>
@@ -58,6 +58,9 @@
 
 <script>
   import { getRotationChart } from '@/api/home';
+  import { getHotAct } from '@/api/home';
+  import { getRecommendAct } from '@/api/home';
+
 export default {
   data() {
     return {
@@ -69,57 +72,50 @@ export default {
 
       }
       ],
-      hotAct:[{
-        actName:"周末文化艺术节",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      },
-      {
-        actName:"乒乓球",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      },{
-        actName:"篮球",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      }
+      hotAct:[
+        
     ],
-      recommendAct:[{
-        actName:"推荐1",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      },
-      {
-        actName:"推荐2",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      },
-      {
-        actName:"推荐3",
-        currentDate: new Date(),
-        imgSrc: "https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png",
-        url:"",
-      },
+      recommendAct:[
       ]
     };
   },
   methods:{
     getRotationChart(){
-      console.log("获取轮播图")
       getRotationChart().then(res=>{
+        console.log("获取轮播图")
         console.log(res)
         this.carousel=res.data.data;
 
-  })
+      })
+    },
+    getHotAct(){
+      getHotAct().then(res=>{
+        console.log("热门活动")
+        console.log(res)
+        this.hotAct=res.data.data
+      })
+    },
+    getRecommendAct(){
+      getRecommendAct().then(res=>{
+        console.log("推荐活动")
+        console.log(res)
+        this.recommendAct=res.data.data
+      })
+    },
+    lookDetail(id){
+      //传递的参数不会拼接在跳转的后面。使用this.route.query.key取值
+     
+      this.$router.push({path: '/ActivityInfo',query: {'id':id}});
+
+       //传递的参数会拼接在跳转地址的后面。使用this.route.params.key取值
+      //this.$router.push({name: 'ActivityInfo',params: {actId:id}});
     }
   },
   created(){
-    this.getRotationChart()
+    this.getHotAct();
+    this.getRecommendAct();
+    this.getRotationChart();
+  
   }
 }
 </script>
@@ -160,6 +156,12 @@ export default {
 
   .image {
     width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .imagesmall {
+    width: 100%;
+    height:400px;
     display: block;
   }
 
