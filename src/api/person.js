@@ -26,7 +26,7 @@ const post='/post'  //标识该请求方法为post请求方法
 export const getSearchParam = () => {
   return request({
     url: BaseURL+get+'/searchParam',
-    methods: 'get'
+    method: 'get'
   })
 }
 
@@ -42,7 +42,7 @@ export const getSearchParam = () => {
 export const getDefultList = () => {
   return request({
     url: BaseURL+get+'/DefultList',
-    methods: 'get'
+    method: 'get'
   })
 }
 
@@ -57,7 +57,7 @@ export const getDefultList = () => {
 export const getActivityInfo = (id) => {
   return request({
     url: BaseURL +get+'/activityInfo'+'?actId='+id,
-    methods: 'get'
+    method: 'get'
   })
 }
 
@@ -81,8 +81,9 @@ export const getActivityInfo = (id) => {
 
 export const addCollectedAct = (id) => {
   return request({
-    url: BaseURL +post+'/addCollectedAct'+'?actId='+id,
-    methods: 'post'
+    url: BaseURL +post+'/addCollectedAct',
+    method: 'post',
+    data:{'id':id}
   })
 }
   
@@ -96,8 +97,9 @@ export const addCollectedAct = (id) => {
  * */
 export const addSignUpAct = (id) => {
   return request({
-    url: BaseURL +post+'/addSignUpAct'+'?actId='+id,
-    methods: 'post'
+    url: BaseURL +post+'/addSignUpAct',
+    method: 'post',
+    data:{'id':id}
   })
 }
 
@@ -112,8 +114,9 @@ export const addSignUpAct = (id) => {
 
    export const cancelCollectedAct = (id) => {
     return request({
-      url: BaseURL +post+'/cancelCollectedAct'+'?actId='+id,
-      methods: 'post'
+      url: BaseURL +post+'/cancelCollectedAct',
+      method: 'post',
+      data:{id:id}
     })
   }
     
@@ -127,8 +130,9 @@ export const addSignUpAct = (id) => {
    * */
   export const cancelSignUpAct = (id) => {
     return request({
-      url: BaseURL +post+'/cancelSignUpAct'+'?actId='+id,
-      methods: 'post'
+      url: BaseURL +post+'/cancelSignUpAct',
+      method: 'post',
+      data:id
     })
   }
   
