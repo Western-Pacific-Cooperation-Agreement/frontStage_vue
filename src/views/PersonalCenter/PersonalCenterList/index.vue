@@ -4,12 +4,13 @@
     <el-row :gutter="12">
   <el-col :span="24">
     <el-card >
-          <el-avatar :size=200 :src="circleUrl" style="float:left;margin:10px 100px;"></el-avatar>
-          <div><span style="font-size: 50px;">UserName:GitXulti<el-button type="success" icon="el-icon-check"   @click="Certified" circle></el-button></span></div>
-          <div><span style="font-size: 50px;">UserId:100001</span></div>
-          <div><span style="font-size: 20px;">签名:好想做一个基于NLP和过滤协同的大学生活动管理与推荐的前后端分离系统呀</span><el-button type="primary" icon="el-icon-edit"></el-button></div>
-          <div> <el-button type="primary" plain>编辑</el-button>
-            <el-button type="danger" plain>退出登录</el-button>
+          <el-avatar :size=200 :src="userInfo.avatar" style="float:left;margin:10px 100px;"></el-avatar>
+          <div><span style="font-size: 50px;">UserName:{{userInfo.username}}<el-button type="success" icon="el-icon-check"   @click="Certified" circle></el-button></span></div>
+          <div><span style="font-size: 50px;">UserId:{{userInfo.id}}</span></div>
+          <div><span style="font-size: 20px;margin-left: 20px;">签名:{{userInfo.userAutograph}}</span>
+          </div>
+          <div> <el-button type="primary" plain @click="dialogVisible = true,getEditUserInfo()">编辑</el-button>
+            <el-button type="danger" plain @click="logout()">退出登录</el-button>
           </div>
     </el-card>
   </el-col>
@@ -49,6 +50,61 @@
       ></my-upload>
 </div>
 
+<el-dialog
+  title="编辑个人信息"
+  :visible.sync="dialogVisible"
+    width="30%"
+  >
+
+  <el-form ref="form" :model="editInfo" label-width="80px">
+
+  <el-form-item label="用户名">
+    {{editInfo.username}}
+  </el-form-item>
+
+  <el-form-item label="用户Id">
+    {{editInfo.id}}
+  </el-form-item>
+
+  <el-form-item label="用户角色">
+    <el-tag v-for="item in editInfo.roles">
+    {{item.roleName}}
+    </el-tag>
+  </el-form-item>
+
+  <el-form-item label="用户签名">
+    <el-input v-model="editInfo.userAutograph" placeholder="写点什么东西吧" ></el-input>
+  </el-form-item>
+
+  <el-form-item label="邮箱">
+    <el-input v-model="editInfo.email" placeholder="写点什么东西吧" ></el-input>
+  </el-form-item>
+
+  <el-form-item label="电话">
+    <el-input v-model="editInfo.phone" placeholder="写点什么东西吧" ></el-input>
+  </el-form-item>
+
+  <el-form-item label="所在地">
+    <el-input v-model="editInfo.city" placeholder="写点什么东西吧" ></el-input>
+  </el-form-item>
+
+  <el-form-item label="用户积分">
+    {{editInfo.userIntegral}}
+  </el-form-item>
+
+  <el-form-item>
+    <el-button type="primary" @click="updateUserInfo(),dialogVisible = false">确 定</el-button>
+    <el-button @click="dialogVisible = false;getUserInfo();">取 消</el-button>
+
+  </el-form-item>
+</el-form>
+
+
+
+
+
+
+</el-dialog>
 
 
 
@@ -59,13 +115,12 @@
 </template>
 
 <script>
-
-
-  import myUpload from 'vue-image-crop-upload';//引入组件
-
+import myUpload from 'vue-image-crop-upload';//引入组件
 import NoMessage from '@/components/NoMessage/index.vue'
 import CenterMenu from './CenterMenu'
 import backImg from "@/assets/头像.jpg";
+import {getUserInfo,updateUserInfo} from '@/api/person'
+import { logout } from '@/api/login';
 export default {
     data () {
       return {
@@ -73,13 +128,26 @@ export default {
         circleUrl: backImg,
         squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
         sizeList: ["large", "medium", "small"],
-        imagecropperShow: true,
+        imagecropperShow: false,
         imagecropperKey: 0,
         userInfo:[],
-        userJoinAct:[],
-        userApplyAct:[],
-        userCollectAct:[],
+        editInfo:[],
+        dialogVisible: false,
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
       }
+    },
+    created(){
+      this.getUserInfo();
+
     },
     components:{
       NoMessage,
@@ -115,9 +183,48 @@ export default {
       },
       openHead(){
         dialogFormVisible = true;
+      },
+      updateUserInfo(){
+        getUserInfo().then(res=>{
+          console.log("获得用户当前信息");
+          console.log(res);
+          this.userInfo=res.data.data;
+        })
+      },
+      getUserInfo(){
+        getUserInfo().then(res=>{
+          console.log("获得用户当前信息");
+          console.log(res);
+          this.userInfo=res.data.data;
+        })
+      },
+      logout(){
+        logout().then(res=>{
+          this.$message({
+            type:'success',
+            message:res.data.msg,
+          })
+        });
+      },
+      getEditUserInfo() {
+        getUserInfo().then(res=>{
+          console.log("获得用户当前信息");
+          console.log(res);
+          this.editInfo=res.data.data;
+        })
+      },updateUserInfo(){
+        updateUserInfo(this.editInfo).then(res=>{
+          this.$message({
+            type:'success',
+            message:res.data.msg,
+          })
+          this.getUserInfo();
+        })
+       
       }
     
-    }
+    },
+    
   }
 </script>
 

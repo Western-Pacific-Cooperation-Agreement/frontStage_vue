@@ -64,15 +64,28 @@
   </template>
   
   <script>
+      import {getMyJoinAct} from '@/api/person'
     export default {
       methods: {
         handleClick(row) {
           console.log(row);
+        },
+        getMyJoinAct(){
+          getMyJoinAct().then(res=>{
+            console.log("获得我参加的活动");
+            console.log(res);
+            this.userJoinAct=res.data.data;
+          })
         }
+      },
+      created(){
+        this.getMyJoinAct();
       },
   
       data() {
         return {
+          userJoinAct:[],
+   
           tableData: [{
             name: '周末文化集市',
             id:1,

@@ -56,7 +56,7 @@ var qs = require('qs')              //引入qs，会方便我们数据的转换�
  * */
 export function logout() {
   return request({
-    url: '/user/logout',
+    url: '/logout',
     method: 'post'
   })
 }

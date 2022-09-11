@@ -52,15 +52,28 @@
 </template>
 
 <script>
+  import {getMyCollectAct} from '@/api/person'
+
   export default {
     methods: {
       handleClick(row) {
         console.log(row);
+      },
+      getMyCollectAct(){
+        getMyCollectAct().then(res=>{
+          console.log("获得收藏的活动")
+          console.log(res)
+          this.userCollectAct=res.data.data;
+        })
       }
+    },
+    created(){
+      this.getMyCollectAct();
     },
 
     data() {
       return {
+        userCollectAct:[],
         tableData: [{
           name: '周末文化集市',
           id:1,

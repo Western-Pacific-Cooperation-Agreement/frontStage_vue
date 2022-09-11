@@ -66,15 +66,28 @@
   </template>
   
   <script>
-    export default {
+  import {getMyApplyAct} from '@/api/person'
+export default {
       methods: {
         handleClick(row) {
           console.log(row);
+        },
+        getMyApplyAct(){
+          getMyApplyAct().then(res=>{
+            console.log("我申请的活动")
+          console.log(res)
+            this.userApplyAct=res.data.data;
+          })
         }
+
       },
-  
+      created(){
+        this.getMyApplyAct();  
+
+      },
       data() {
         return {
+          userApplyAct:[],
           tableData: [{
             name: '周末文化集市',
             id:1,
@@ -105,7 +118,6 @@
             startDate:"2022/9/19",
             reply:"不同意申请，场地已被使用。",
             zip: "未通过"
-
           },
           {
             name: '计算机学院乒乓球比赛',
