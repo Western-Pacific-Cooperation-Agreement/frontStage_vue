@@ -74,7 +74,7 @@ export const getJoinInfo = () => {
     url: BaseURL+get+'/JoinInfo',
     method: 'get'
   })
-
+}
 //**********************以下为活动详情界面请求 */
 /** 
  * 方法名：getActivityInfo()
