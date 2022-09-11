@@ -4,7 +4,7 @@ import request from '@/utils/axios' //api可以理解为普通axios的第二次�
 
 var qs = require('qs')              //引入qs，会方便我们数据的转换操作
 
-const BaseURL = '/act'//基础首页路径 =>对应后端请求的@RequestMapping("/act")
+const BaseURL = '/person'//基础首页路径 =>对应后端请求的@RequestMapping("/act")
 
 const get='/get'    //标识该请求方法为get请求
 
@@ -15,7 +15,7 @@ const post='/post'  //标识该请求方法为post请求方法
 //**********************以下为搜索界面请求 */
 
 /** 
- * 方法名：getDefultList()
+ * 方法名：getUserInfo()
  * 方法参数：无
  * 作者：WPCA-XieQijiang
  * 描述：获得默认（或推荐的）的活动列表
@@ -23,15 +23,15 @@ const post='/post'  //标识该请求方法为post请求方法
  * */
 
 // 通过获得搜索的数据可以选择的数据，例如积分之类的等等
-export const getSearchParam = () => {
+export const getUserInfo = () => {
   return request({
-    url: BaseURL+get+'/searchParam',
+    url: BaseURL+get+'/userInfo',
     method: 'get'
   })
 }
 
 /** 
- * 方法名：getDefultList()
+ * 方法名：getApplyInfo()
  * 方法参数：无
  * 作者：WPCA-XieQijiang
  * 描述：获得默认（或推荐的）的活动列表
@@ -39,12 +39,41 @@ export const getSearchParam = () => {
  * */
 
 // 通过获得默认的活动列表
-export const getDefultList = () => {
+export const getApplyInfo = () => {
   return request({
-    url: BaseURL+get+'/DefultList',
+    url: BaseURL+get+'/applyInfo',
     method: 'get'
   })
 }
+/** 
+ * 方法名：getCollectInfo()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述：获得默认（或推荐的）的活动列表
+ * 时间：2022年9月9日14:19:23
+ * */
+
+// 通过获得默认的活动列表
+export const getCollectInfo = () => {
+  return request({
+    url: BaseURL+get+'/collectInfo',
+    method: 'get'
+  })
+  }
+  /** 
+ * 方法名：getJoinInfo()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述：获得默认（或推荐的）的活动列表
+ * 时间：2022年9月9日14:19:23
+ * */
+
+// 通过获得默认的活动列表
+export const getJoinInfo = () => {
+  return request({
+    url: BaseURL+get+'/JoinInfo',
+    method: 'get'
+  })
 
 //**********************以下为活动详情界面请求 */
 /** 

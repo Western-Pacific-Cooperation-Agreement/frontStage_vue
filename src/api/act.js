@@ -150,6 +150,61 @@ export const getActivityInfo = (id) => {
   })
 }
 
+/** 
+ * 方法名：getActObject()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得活动对象信息
+ * 时间：2022年9月10日16:35:28
+ * */
+ export function getActObject(){
+  return request({
+    url: BaseURL +get+'/actObject',
+    method: 'get'
+  })
+}
+
+/** 
+ * 方法名：getActAsso()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得用部门信息
+ * 时间：2022年9月10日16:35:28
+ * */
+ export function getActAsso(){
+  return request({
+    url: BaseURL +get+'/actAsso',
+    method: 'get'
+  })
+}
+/** 
+ * 方法名：getActUser()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得负责人信息
+ * 时间：2022年9月11日09:35:03
+ * */
+ export function getActUser(id){
+  return request({
+    url: BaseURL +get+'/actUser/'+id,
+    method: 'get'
+  })
+}
+
+/** 
+ * 方法名：getActType()
+ * 方法参数：无
+ * 作者：WPCA-XieQijiang
+ * 描述： 获得活动类型信息
+ * 时间：2022年9月11日09:35:03
+ * */
+ export function getActType(){
+  return request({
+    url: BaseURL +get+'/actType/',
+    method: 'get'
+  })
+}
+
 //******************以下为post方法请求集 注意这里的命名要求*************************
 
 //**********************以下为搜索界面请求 */
@@ -185,8 +240,6 @@ export function addCollectedAct(id){
  * 时间：2022年9月9日14:19:23
  * */
 export function addSignUpAct(id){
-
-
   return request({
     url: BaseURL +post+'/addSignUpAct',
     method:  'post',

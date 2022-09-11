@@ -31,9 +31,7 @@
 
 
 
-<!-- Form -->
-<el-button type="text" @click.native="openHead()">打开嵌套表单的 Dialog</el-button>
-
+<!-- 头像Form -->
   <div>
       <my-upload
       :params="params"         
@@ -77,7 +75,10 @@ export default {
         sizeList: ["large", "medium", "small"],
         imagecropperShow: true,
         imagecropperKey: 0,
- 
+        userInfo:[],
+        userJoinAct:[],
+        userApplyAct:[],
+        userCollectAct:[],
       }
     },
     components:{
