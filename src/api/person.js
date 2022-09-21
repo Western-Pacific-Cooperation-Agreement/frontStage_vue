@@ -118,9 +118,9 @@ export const getActivityInfo = (id) => {
  * 时间：2022年9月9日14:19:23
  * */
 
- export const getMyCollectAct = (id) => {
+ export const getMyCollectAct = (param) => {
   return request({
-    url: BaseURL +get+'/myCollectAct',
+    url: BaseURL +get+'/myCollectAct?'+qs.stringify(param),
     method: 'get'
   })
 }
@@ -132,10 +132,11 @@ export const getActivityInfo = (id) => {
  * 时间：2022年9月9日14:19:23
  * */
 
- export const getMyJoinAct = (id) => {
+ export const getMyJoinAct = (param) => {
+ 
   return request({
-    url: BaseURL +get+'/myJoinAct',
-    method: 'get'
+    url: BaseURL +get+'/myJoinAct?'+qs.stringify(param),
+    method: 'get',
   })
 }
 
@@ -156,5 +157,76 @@ export const getActivityInfo = (id) => {
       method: 'post',
       data:param
     })
+  }
+    //收藏活动
+  /** 
+ * 方法名：addCollectedAct()
+ * 方法参数：活动的id
+ * 作者：WPCA-XieQijiang
+ * 描述：收藏
+ * 时间：2022年9月9日14:19:23
+ * */
+
+export function addCollectedAct(id){
+
+  return request({
+    url: BaseURL +post+'/addCollectedAct',
+    method:  'post',
+    data: {id:id}
+  })
+}
+  
+  //报名活动
+  /** 
+ * 方法名：addSignUpAct()
+ * 方法参数：活动的id
+ * 作者：WPCA-XieQijiang
+ * 描述：报名
+ * 时间：2022年9月9日14:19:23
+ * */
+export function addSignUpAct(id){
+  return request({
+    url: BaseURL +post+'/addSignUpAct',
+    method:  'post',
+    data: {id:id}
+  })
+}
+
+//收藏活动
+  /** 
+ * 方法名：addCollectedAct()
+ * 方法参数：活动的id
+ * 作者：WPCA-XieQijiang
+ * 描述：取消收藏
+ * 时间：2022年9月9日14:19:23
+ * */
+
+export function cancelCollectedAct(id){
+    const params = new URLSearchParams()
+    params.append('id',id)
+
+    return request({
+      url: BaseURL +post+'/cancelCollectedAct',
+      method: 'post',
+      data: {id:id}
+    })
+}
+    
+
+    /** 
+   * 方法名：addSignUpAct()
+   * 方法参数：活动的id
+   * 作者：WPCA-XieQijiang
+   * 描述：取消报名
+   * 时间：2022年9月9日14:19:23
+   * */
+  export function cancelSignUpAct(id) {
+    const params = new URLSearchParams()
+    params.append('id',id)
+    return request({
+      url: BaseURL +post+'/cancelSignUpAct',
+      method:  'post',
+      data: {id:id}
+    },)
   }
   

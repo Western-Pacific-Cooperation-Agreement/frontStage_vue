@@ -1,13 +1,15 @@
 <template>
     <div>
+		
     <HelloUser></HelloUser>
+
     <div class="page">
 	<el-row type="flex" class="row-bg" justify="center">
         <el-col >
-            <el-card style="width: 500px;height: 500px;" id="image">
+            <el-card style="width: 500px;height: 600px;" id="image">
             <el-image
    style="width: 100%; height: 100%"
-   :src="require('@/assets/images/login.png')"
+   :src="require('@/assets/images/login.jpg')"
    fit="fill"
    class="tempimg"></el-image>
 </el-card>
@@ -41,7 +43,7 @@
 
 	</el-row>
 
-</div>
+	</div>
 	<!--新增对话框-->
     <el-dialog
 				title="创建新的用户"
@@ -76,7 +78,6 @@
 	//引入Api
 	import{login,getCaptcha} from "@/api/login.js"
 	import qs from 'qs'
-
     import HelloUser from '@/components/HelloUser/index.vue'
 	export default {
 		name: "Login",
@@ -132,6 +133,7 @@
 						return false;
 					}
 				});
+				this.getCaptcha();
 			},
 			resetForm(formName) {
 				this.$refs[formName].resetFields();
@@ -176,7 +178,6 @@
 		text-align: center;
 		justify-content: center;
         height: 750px;
-
     }
    
 	.el-row {

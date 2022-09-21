@@ -23,10 +23,12 @@
       </router-link>
 
       </el-submenu>
+
+<!-- 
       <el-submenu index="2">
         <template slot="title">
             <i class="el-icon-document"></i>
-          <span>我申请的活动</span>
+          <span>我发起的活动</span>
         </template>
 
 
@@ -37,8 +39,8 @@
         </el-menu-item-group>
 
       </router-link>
+      </el-submenu> -->
 
-      </el-submenu>
       <el-submenu index="3">
         <template slot="title">
             <i class="el-icon-menu"></i>
@@ -53,6 +55,8 @@
       </router-link>
 
       </el-submenu>
+
+
       <el-submenu index="4">
         <template slot="title">
             <i class="el-icon-setting"></i>
@@ -67,6 +71,8 @@
         </router-link>
 
       </el-submenu>
+
+      
  
 
     </el-menu>

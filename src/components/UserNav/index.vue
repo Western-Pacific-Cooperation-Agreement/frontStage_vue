@@ -2,7 +2,7 @@
   <div>
   
 <el-card>       
-               <span id="bigTitle">厦门理工大学生活动平台</span>
+               <span id="bigTitle">大学生活动管理平台</span>
                <ul>
                 <li><el-link  :underline="false" href="/">
                     首页</el-link>

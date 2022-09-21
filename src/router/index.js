@@ -94,16 +94,18 @@ const routes = [
             },
             //懒加载模式  可以不用再头部import
             component: () => import('../views/PersonalCenter/Show/Join/index.vue'),
-          },{
-            path: '/Apply',
-            name: 'apply',
-            title: '我申请的活动',
-            meta: {
-              title: '我申请的活动'
-            },
-            //懒加载模式  可以不用再头部import
-            component: () => import('../views/PersonalCenter/Show/Apply/index.vue'),
-          },{
+           }
+           //,{
+          //   path: '/Apply',
+          //   name: 'apply',
+          //   title: '我申请的活动',
+          //   meta: {
+          //     title: '我申请的活动'
+          //   },
+          //   //懒加载模式  可以不用再头部import
+          //   component: () => import('../views/PersonalCenter/Show/Apply/index.vue'),
+          // }
+           ,{
             path: '/collection',
             name: 'Collection',
             title: '我收藏的活动',

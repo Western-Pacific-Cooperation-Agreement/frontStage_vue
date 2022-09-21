@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import { message } from './utils/reset-message' // reset message
 import axios from './utils/axios'
 import 'element-ui/lib/theme-chalk/index.css'
 
@@ -10,7 +11,7 @@ import AMap from 'vue-amap';
 
 
 Vue.prototype.$axios=axios
-Vue.prototype.$message = ElementUI.Message
+Vue.prototype.$message = message
 
 //mockjs模拟数据请求
 //require("./mock.js")

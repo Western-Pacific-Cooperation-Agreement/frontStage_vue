@@ -53,6 +53,8 @@
 
 
   </el-card>
+
+  
   </div>  
 </template>
 
@@ -86,14 +88,14 @@ export default {
       getHotAct().then(res=>{
         console.log("热门活动")
         console.log(res)
-        this.hotAct=res.data.data
+        this.hotAct=res.data.data.records
       })
     },
     getRecommendAct(){
       getRecommendAct().then(res=>{
         console.log("推荐活动")
         console.log(res)
-        this.recommendAct=res.data.data
+        this.recommendAct=res.data.data.records
       })
     },
     lookDetail(id){

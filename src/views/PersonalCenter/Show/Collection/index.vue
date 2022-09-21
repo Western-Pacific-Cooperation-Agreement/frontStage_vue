@@ -1,42 +1,62 @@
 <template>
+  <div>
+      <el-form :inline="true">
+    <el-form-item>
+				<el-input
+						v-model="searchForm.name"
+						placeholder="名称"
+						clearable
+				>
+				</el-input>  
+			</el-form-item>
+      <el-form-item>
+        <el-date-picker
+      v-model="searchForm.start"
+      type="date"
+      placeholder="选择搜索起始日期">
+    </el-date-picker>
+      </el-form-item>
+      <el-form-item>
+        <el-date-picker
+      v-model="searchForm.end"
+      type="date"
+      placeholder="选择搜索终止日期">
+    </el-date-picker>
+      </el-form-item>
+ 
+			<el-form-item>
+				<el-button @click="getMyCollectAct()">搜索</el-button>
+			</el-form-item>
+    </el-form>
   <el-table
     :data="tableData"
     border
     style="width: 100%">
     <el-table-column
-      fixed
-      prop="name"
-      label="活动名称"
-      width="150">
-    </el-table-column>
+        fixed
+        prop="coreAct.actName"
+        label="活动名称"
+        width="150">
+      </el-table-column>
     <el-table-column
-      prop="id"
+      prop="coreAct.id"
       label="活动编码"
       width="120">
     </el-table-column>
+
     <el-table-column
-      prop="association"
-      label="所属社团"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="nature"
-      label="活动性质"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="integral"
+      prop="coreAct.actIntegral"
       label="活动积分"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="address"
+      prop="coreAct.actPlace"
       label="活动地点"
       width="300">
     </el-table-column>
 
     <el-table-column
-      prop="startDate"
+      prop="coreAct.actStartDate"
       label="活动开始时间"
       width="120">
     </el-table-column>
@@ -45,34 +65,53 @@
       label="操作"
       width="200">
       <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">取消收藏</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+
+        <el-button @click="cancelCollectedAct(scope.row.coreAct.id)" type="text" size="small">取消收藏</el-button>
       </template>
     </el-table-column>
   </el-table>
+</div>
 </template>
 
 <script>
-  import {getMyCollectAct} from '@/api/person'
-
+  import {getMyCollectAct,cancelCollectedAct} from '@/api/person'
   export default {
     methods: {
       handleClick(row) {
         console.log(row);
+        this.$router.push({path: '/ActivityInfo',query: {'id':row.coreAct.id}});
       },
       getMyCollectAct(){
-        getMyCollectAct().then(res=>{
+        getMyCollectAct(this.searchForm).then(res=>{
           console.log("获得收藏的活动")
           console.log(res)
-          this.userCollectAct=res.data.data;
+          this.tableData=res.data.data;
+        })
+      },
+      cancelCollectedAct(id){
+        cancelCollectedAct(id).then(res=>{
+          console.log("取消收藏"+res)
+          this.$message({
+            type:"success",
+            message:res.data.msg,
+          })
+          this.getMyCollectAct()
         })
       }
-    },
+    }
+      ,
     created(){
       this.getMyCollectAct();
     },
 
     data() {
       return {
+        searchForm:{
+        name:"",
+        start:"",
+        end:"",
+      },
         userCollectAct:[],
         tableData: [{
           name: '周末文化集市',
@@ -123,10 +162,16 @@
           address: '厦门理工精工楼-1',
           zip: "存档",
           startDate:"2022/9/1",
-        }]
+        }],
+        userInfo:[],
+        roleInfo:[],
+        actObjcet:[],
+        actAsso:[],
+        actUserPhone:'',
+        actType:[]
       }
-    }
   }
+}
 </script>
 
 <style scoped>

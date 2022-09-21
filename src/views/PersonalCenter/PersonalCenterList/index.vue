@@ -4,7 +4,11 @@
     <el-row :gutter="12">
   <el-col :span="24">
     <el-card >
-          <el-avatar :size=200 :src="userInfo.avatar" style="float:left;margin:10px 100px;"></el-avatar>
+      <el-button type="primary" plain @click="imagecropperShow=true" style="float:left;margin:10px 100px;" >
+
+          <el-avatar :size=200 :src="userInfo.avatar"  @click="imagecropperShow=true"></el-avatar>
+
+          </el-button>
           <div><span style="font-size: 50px;">UserName:{{userInfo.username}}<el-button type="success" icon="el-icon-check"   @click="Certified" circle></el-button></span></div>
           <div><span style="font-size: 50px;">UserId:{{userInfo.id}}</span></div>
           <div><span style="font-size: 20px;margin-left: 20px;">签名:{{userInfo.userAutograph}}</span>
@@ -46,7 +50,7 @@
       @crop-success="cropSuccess()" 
       @crop-upload-success="cropUploadSuccess()"
       @crop-upload-fail="cropUploadFail()"
-      url="/api/uploadAvatar"
+      url="http://localhost:18888/person/post/uploadAvatar"
       ></my-upload>
 </div>
 
@@ -124,15 +128,21 @@ import { logout } from '@/api/login';
 export default {
     data () {
       return {
+      
         dialogFormVisible: true,
         circleUrl: backImg,
         squareUrl: "https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png",
         sizeList: ["large", "medium", "small"],
         imagecropperShow: false,
         imagecropperKey: 0,
-        userInfo:[],
+        userInfo:{
+          username:"",
+        },
         editInfo:[],
         dialogVisible: false,
+        params:{
+          username:"",//发给后端的携带的参数，按需求，不需要携带直接删掉
+        },
         form: {
           name: '',
           region: '',
@@ -173,12 +183,14 @@ export default {
         console.log('-------- upload success --------');
         console.log(res);
         console.log(originPicName);
+        this.getUserInfo()
       },
       //上传失败回调
       cropUploadFail(status, field) {
         console.log('-------- upload fail --------');
         console.log('上传失败状态' + status);
         console.log('field: ' + field);
+        this.getUserInfo()
  
       },
       openHead(){
@@ -189,6 +201,7 @@ export default {
           console.log("获得用户当前信息");
           console.log(res);
           this.userInfo=res.data.data;
+    
         })
       },
       getUserInfo(){
@@ -196,6 +209,7 @@ export default {
           console.log("获得用户当前信息");
           console.log(res);
           this.userInfo=res.data.data;
+          this.params.username=res.data.data.username
         })
       },
       logout(){
@@ -231,7 +245,6 @@ export default {
 <style scoped>
 .page{
   width: 80%;
- 
   margin:0 auto;
 }
 

@@ -53,30 +53,28 @@ export const getDefultList = () => {
  * 时间：2022年9月9日14:19:23
  * */
 // 通过关键词等相关数据搜索获取活动列表
-export const getSearchList = (
-  actName/**关键活动名词*/,
-  actPlace/**活动区域*/,
-  startTime/**活动开始时间*/,
-  endTime/**活动截止报名时间*/,
-  asso/**活动部门*/,
-  actType/**活动性质*/,
-  integral/**活动积分*/,
-  actObject/**关键活动名词*/,
-  fuzzySearch/**模糊搜索*/,
+export const getSearchList = (form
   ) => {
   return request({
-    url: BaseURL+get+'/SearchList'
-    +'?actName='+actName+'&'
-    +'?actPlace='+actPlace+'&'
-    +'?startTime='+startTime+'&'
-    +'?endTime='+endTime+'&'
-    +'?asso='+asso+'&'
-    +'?actType='+actType+'&'
-    +'?integral='+integral+'&'
-    +'?actObject='+actObject+'&'
-    +'?fuzzySearch='+fuzzySearch+'&'
-    ,
+    url: BaseURL+get+'/SearchList?'+qs.stringify(form),
     methods: 'get'
+  })
+}
+/** 
+ * 方法名：getSearchListBySQL()
+ * 方法参数：界面的搜索SQL参数
+ * 作者：WPCA-XieQijiang
+ * 描述：获得搜索的数据列表
+ * 时间：2022年9月9日14:19:23
+ * */
+// 通过关键词等相关数据搜索获取活动列表
+export const getSearchListBySQL = (sql
+  ) => {
+    console.log( BaseURL+get+'/SearchListBySQL');
+  return request({
+    url: BaseURL+get+'/SearchListBySQL/',
+    method: 'post',
+    data:{sql:sql}
   })
 }
 
@@ -256,7 +254,7 @@ export function addSignUpAct(id){
  * 时间：2022年9月9日14:19:23
  * */
 
-   export function cancelCollectedAct(id){
+export function cancelCollectedAct(id){
     const params = new URLSearchParams()
     params.append('id',id)
 
@@ -265,7 +263,7 @@ export function addSignUpAct(id){
       method: 'post',
       data: {id:id}
     })
-  }
+}
     
 
     /** 

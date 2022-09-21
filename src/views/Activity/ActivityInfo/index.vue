@@ -14,7 +14,7 @@
       <el-row class="buttonGroup_1">
 
      
-  <el-button type="danger" v-if="!applied&&table.actReviewerStaus==1" @click="dialogVisible = true">报名活动</el-button>
+  <el-button type="danger" v-if="(!applied)&&table.actReviewerStaus==1" @click="dialogVisible = true">报名活动</el-button>
 
   <el-popconfirm 
   confirm-button-text='好的'
@@ -23,7 +23,7 @@
   icon-color="red"
   title="这是一段内容确定删除吗？"
 >
-  <el-button type="danger"  slot="reference" v-if="applied"  plain  @click="cancelSignUpAct()" >取消报名</el-button>
+  <el-button type="danger"  slot="reference" v-if="applied&&table.actReviewerStaus==1"  plain  @click="cancelSignUpAct()" >取消报名</el-button>
 </el-popconfirm>
 
   <el-button type="warning" v-if="!collected" @click.capture="addCollectedAct()">收藏活动</el-button>
@@ -127,8 +127,8 @@
         <el-tag type="warning" v-if="table.actReviewerStaus==0">活动未审核</el-tag>
         <el-tag type="danger" v-if="table.actReviewerStaus==1">报名中</el-tag>
         <el-tag type="info" v-if="table.actReviewerStaus==2">活动结束</el-tag>
-        <el-tag type="info" v-if="table.actReviewerStaus==3">审核失败</el-tag>
-
+        <el-tag type="success" v-if="table.actReviewerStaus==3">存档</el-tag>
+        <el-tag type="info" v-if="table.actReviewerStaus==4">审核失败</el-tag>
       </el-form-item>
     </el-form>
           </div>
