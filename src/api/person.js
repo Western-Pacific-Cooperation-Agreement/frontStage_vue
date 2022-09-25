@@ -202,9 +202,6 @@ export function addSignUpAct(id){
  * */
 
 export function cancelCollectedAct(id){
-    const params = new URLSearchParams()
-    params.append('id',id)
-
     return request({
       url: BaseURL +post+'/cancelCollectedAct',
       method: 'post',

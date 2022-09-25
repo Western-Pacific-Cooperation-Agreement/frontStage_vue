@@ -16,8 +16,6 @@ export default new Vuex.Store({
 			console.log("系统设置了Token，token=",token)
 			console.log("系统设置了Token，localStorage.getItem('token')=",localStorage.getItem("token"))
 		},
-
-
 	},
 	actions: {},
 	modules: {

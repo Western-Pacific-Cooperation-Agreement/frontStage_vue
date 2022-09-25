@@ -10,7 +10,6 @@
 						clearable
 				>
 				</el-input>
-        
 			</el-form-item>
       <el-form-item>
         <el-date-picker
@@ -26,7 +25,6 @@
       placeholder="选择搜索终止日期">
     </el-date-picker>
       </el-form-item>
- 
 			<el-form-item>
 				<el-button @click="getMyJoinAct()">搜索</el-button>
 			</el-form-item>
