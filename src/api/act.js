@@ -77,7 +77,15 @@ export const getSearchListBySQL = (sql
     data:{sql:sql}
   })
 }
-
+export const getSearchListBySimpleSQL = (ssql
+  ) => {
+    console.log( BaseURL+get+'/SearchListBySimpleSQL');
+  return request({
+    url: BaseURL+get+'/SearchListBySimpleSQL/',
+    method: 'post',
+    data:{ssql:ssql}
+  })
+}
 //**********************以下为活动详情界面请求 */
 /** 
  * 方法名：getActivityInfo()

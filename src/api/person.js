@@ -225,5 +225,5 @@ export function cancelCollectedAct(id){
       method:  'post',
       data: {id:id}
     },)
-  }
+}
   

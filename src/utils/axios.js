@@ -43,13 +43,14 @@ request.interceptors.response.use(
 	},
 	error => {
 
-		console.log(error)
-
 		if (error.response.data) {
 			error.massage = error.response.data.msg
+		
 		}
 
 		if (error.response.status === 401) {
+			console.log("401");
+			localStorage.setItem("token","")
 			router.push("/login")
 		}
         Message({
